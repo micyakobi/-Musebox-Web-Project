@@ -1,0 +1,158 @@
+﻿@{ ViewData["Title"] = "adminstat";
+                Layout = "_Layout"; }
+@using Musebox_Web_Project.Controllers
+
+<section id="home-adminstat" class="home-adminstat">
+    <div class="container">
+
+        <div class="section-title">
+            <span>Statistics</span>
+            <h2>Statistics</h2>
+        </div>
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta name="description" content="d3 bar chart vertical bars">
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width">
+            <title>JS Bin</title>
+            <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+            <style>
+                #barChart {
+                    font-size: 14px;
+                }
+
+                .bar {
+                    fill: steelblue;
+                }
+
+                    .bar:hover {
+                        fill: brown;
+                    }
+
+                .axis path,
+                .axis line {
+                    fill: none;
+                    stroke: #000;
+                    shape-rendering: crispEdges;
+                }
+
+                .x.axis path {
+                    display: none;
+                }
+            </style>
+        </head>
+        <body>
+            <svg id="barChart"></svg>
+
+
+            <script>
+
+                var data = [
+
+                        @if (ViewBag.data != null)
+                    {
+        @foreach (var v in ViewBag.data as ICollection<Stat>)
+        {
+<tr>
+    <th> @v.Key</th>
+    <th>@v.Values</th>
+</tr>}}
+                
+                  @*  {
+                        Product: "Shoes",
+                        Count: 5
+                    }, {
+                        Product: "Shirts",
+                        Count: 9
+                    }, {
+                        Product: "Pants",
+                        Count: 3
+                    }, {
+                        Product: "Ties",
+                        Count: 1
+                    }, {
+                        Product: "Socks",
+                        Count: 7
+                    }, {
+                        Product: "Jackets",
+                        Count: 2
+                    }];*@
+
+
+                var margin = {
+                    top: 20,
+                    right: 20,
+                    bottom: 50,
+                    left: 40
+                },
+                    width = 250 - margin.left - margin.right,
+                    height = 250 - margin.top - margin.bottom;
+
+
+                var x = d3.scale.ordinal()
+                    .rangeRoundBands([width, 0], 0.1);
+
+                var y = d3.scale.linear()
+                    .range([0, height]);
+
+                var xAxis = d3.svg.axis()
+                    .scale(x)
+                    .orient("bottom");
+
+                var yAxis = d3.svg.axis()
+                    .scale(y)
+                    .orient("left")
+                    .tickFormat(d3.format("d"))
+                    .tickSubdivide(0);
+
+
+                var svg = d3.select("svg#barChart")
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
+                    .append("g")
+                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+                x.domain(data.map(function (d) {
+                    return d.Product;
+                }));
+
+                y.domain([d3.max(data, function (d) {
+                    return d.Count;
+                }), 0]);
+
+                svg.append("g")
+                    .attr("class", "y axis")
+                    .attr("transform", "translate(0," + height + ")")
+                    .call(xAxis)
+                    .selectAll("text")
+                    .attr("transform", "rotate(90)")
+                    .attr("x", 0)
+                    .attr("y", -6)
+                    .attr("dx", ".6em")
+                    .style("text-anchor", "start");
+
+                svg.append("g")
+                    .attr("class", "y axis")
+                    .call(yAxis);
+
+                svg.selectAll(".bar")
+                    .data(data)
+                    .enter().append("rect")
+                    .attr("class", "bar")
+
+                    .attr("x", function (d) {
+                        return x(d.Product);
+                    })
+                    .attr("width", x.rangeBand())
+                    .attr("y", function (d) {
+                        return y(d.Count);
+                    })
+                    .attr("height", function (d) {
+                        return height - y(d.Count);
+                    });
+
+            </script>
+        </body>
+    </html>

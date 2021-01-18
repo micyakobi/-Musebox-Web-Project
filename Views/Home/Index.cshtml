@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Musebox_Web_Project.Models.Product>
+
+@{
+    ViewData["Title"] = "Home";
+    Layout = "_Layout";
+}
+
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center">
+    <div class="container position-relative" data-aos="fade-up" data-aos-delay="500">
+        <h1>Welcome to Musebox</h1>
+        <h2>The ultimate music store - now ONLINE!</h2>
+        <a asp-action="Catalog" asp-controller="Home" class="btn-get-started scrollto">Go To Store</a>
+    </div>
+</section>
+
+@if (Context.User.IsInRole("Customer") && !Context.User.IsInRole("Admin"))
+{
+    @await Component.InvokeAsync("Recommended");
+}
+
+else if (Context.User.IsInRole("Admin"))
+{
+    <section id="home-index" class="home-index">
+        <div class="container">
+
+            <div class="section-title">
+                <h2>Welcome Back @User.Identity.Name</h2>
+            </div>
+
+        </div>
+    </section>
+}
+
+<section id="home-index" class="home-index">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-6 order-1 order-lg-2 aos-init" data-aos="fade-left">
+                <img src="~/img/front.jpg" class="img-fluid" alt="">
+            </div>
+            <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content aos-init" data-aos="fade-right">
+                <h3>Welcome to the MUSEBOX!</h3>
+                <p class="font-italic">
+                    We'd like to welcome you to the world of music. Musebox is the best store for ANYTHING related to music equipment. Sign in, explore our products and get recommendations just for you!
+                </p>
+                <ul>
+                    <li><i class="icofont-check-circled"></i> Huge variety of products.</li>
+                    <li><i class="icofont-check-circled"></i> 24/7 customer service.</li>
+                    <li><i class="icofont-check-circled"></i> Best prices in the market.</li>
+                    <li><i class="icofont-check-circled"></i> High-quality standards.</li>
+                </ul>
+
+                <aside>Our awesome 24/7 customer service ready to help you with all your needs! </aside>
+                <p>
+                    Looking for the ultimate store to buy your gear? Tired of excessive prices and intolerable customer service? You're in the right place.
+                    Musebox will offer you all you need as a musician, at the best prices and the biggest variety!
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+

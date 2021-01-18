@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Musebox_Web_Project.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<section id="orders" class="orders">
+    <div class="container">
+        <h1>Index</h1>
+
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+
+        <div class="search-container">
+            <form asp-action="SearchO" id="orD">
+
+                <input id="Norder" autocomplete="off" name="name" placeholder="filter by name...">
+                <input id="Dorder" autocomplete="off" type="date" name="date">
+
+            </form>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr class="table100-head">
+                    <th>
+                        @Html.DisplayNameFor(model => model.OrderDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.User)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OrderDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.User.UserName)
+                            </td>
+                            <td class="td-actions">
+                                <a asp-action="Details" asp-route-id="@item.OrderId">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.OrderId">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        @if (Model.Count() == 0)
+        {
+            <div class="section-title">
+                <h2>No Orders</h2>
+            </div>
+        }
+    </div>
+</section>
+
+@section Styles {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+}
+
+
+@section Scripts{
+    <script src="~/js/S/searchOrder.js"></script>
+}

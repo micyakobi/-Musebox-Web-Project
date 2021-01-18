@@ -1,0 +1,44 @@
+﻿@model Musebox_Web_Project.Models.Branch
+    ViewData["Title"] = "Details";
+}
+
+<section id="branches" class="branches">
+    <div class="container">
+        <h1>Details</h1>
+
+        <div>
+            <h4>Branch</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.BranchName)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.BranchName)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Address)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Address)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Latitude)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Latitude)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Longitude)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Longitude)
+                </dd>
+            </dl>
+        </div>
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model.BranchId">Edit</a> |
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </div>
+</section>

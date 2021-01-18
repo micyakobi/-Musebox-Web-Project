@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Musebox_Web_Project.Models.Product>
+
+
+<section id="portfolio" class="portfolio">
+
+    <div class="container">
+
+
+        <div class="row portfolio-container aos-init" height: 263.188px;">
+
+            @foreach (var item in Model)
+            {
+                @if (item.ProductType.Contains("Guitar"))
+                {
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-app" style="position: absolute; left: 0px; top: 0px;">
+                        @if (item.Image != null)
+                        {
+                            string img = Convert.ToBase64String(item.Image);
+                            <img src="data:image/png;base64,@img" class="img-fluid" alt="">
+                        }
+                        else
+                        {
+                            <img src="~/img/Products/Guitars/Suhr - Classic S SSS, Sonic Blue.jpg" class="img-fluid" alt="">
+
+                        }
+                        <div class="portfolio-info">
+                            <h5 id="shop-item-title">@Html.DisplayFor(modelItem => item.Brand.BrandName) - @Html.DisplayFor(modelItem => item.ProductName)</h5>
+                            <p>@Html.DisplayFor(modelItem => item.ProductPrice) $</p>
+                            @if (Context.User.IsInRole("Customer"))
+                            {
+                                <a href="@Url.Action("AddToCart", "Users", new { productId = item.ProductId})" class="details-link" title="Add to Cart"><i class="bx bx-plus shop-item-button"></i></a>
+                            }
+                        </div>
+                    </div>
+                }
+                else if (item.ProductType.Contains("Effect"))
+                {
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-card" style="position: absolute; left: 0px; top: 0px;">
+                        @if (item.Image != null)
+                        {
+                            string img = Convert.ToBase64String(item.Image);
+                            <img src="data:image/png;base64,@img" class="img-fluid" alt="">
+                        }
+                        else
+                        {
+                            <img src="~/img/Products/Guitars/Suhr - Classic S SSS, Sonic Blue.jpg" class="img-fluid" alt="">
+
+                        }
+                        <div class="portfolio-info">
+                            <h5 id="shop-item-title">@Html.DisplayFor(modelItem => item.Brand.BrandName) - @Html.DisplayFor(modelItem => item.ProductName)</h5>
+                            <p>@Html.DisplayFor(modelItem => item.ProductPrice) $</p>
+                            @if (Context.User.IsInRole("Customer"))
+                            {
+                                <a href="@Url.Action("AddToCart", "Users", new { productId = item.ProductId})" class="details-link" title="Add to Cart"><i class="bx bx-plus shop-item-button"></i></a>
+                            }
+                        </div>
+                    </div>
+                }
+                else if (item.ProductType.Contains("Amp"))
+                {
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-web" style="position: absolute; left: 0px; top: 0px;">
+                        @if (item.Image != null)
+                        {
+                            string img = Convert.ToBase64String(item.Image);
+                            <img src="data:image/png;base64,@img" class="img-fluid" alt="">
+                        }
+                        else
+                        {
+                            <img src="~/img/Products/Guitars/Suhr - Classic S SSS, Sonic Blue.jpg" class="img-fluid" alt="">
+
+                        }
+                        <div class="portfolio-info">
+                            <h5 id="shop-item-title">@Html.DisplayFor(modelItem => item.Brand.BrandName) - @Html.DisplayFor(modelItem => item.ProductName)</h5>
+                            <p>@Html.DisplayFor(modelItem => item.ProductPrice) $</p>
+                            @if (Context.User.IsInRole("Customer"))
+                            {
+                                <a href="@Url.Action("AddToCart", "Users", new { productId = item.ProductId})" class="details-link" title="Add to Cart"><i class="bx bx-plus shop-item-button"></i></a>
+                            }
+                        </div>
+                    </div>
+                }
+            }
+
+        </div>
+
+    </div>
+
+</section>
+

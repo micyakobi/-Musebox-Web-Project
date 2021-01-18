@@ -1,0 +1,100 @@
+﻿@model IEnumerable<Musebox_Web_Project.Models.User>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<section id="users" class="users">
+    <div class="container">
+        <h1>Index</h1>
+
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+
+        <div class="search-container">
+            <form asp-action="SearchU" id="usE">
+                <input id="Nuser" autocomplete="off" name="userName" placeholder="filter by username...">
+                <input id="FNuser" autocomplete="off" name="firstName" placeholder="filter by first name...">
+                <input id="LNuser" autocomplete="off" name="lastName" placeholder="filter by last name...">
+                <input id="Euser" autocomplete="off" name="email" placeholder="filter by email...">
+            </form>
+        </div>
+
+
+        <table class="table">
+            <thead>
+                <tr class="table100-head">
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LastName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Password)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsManager)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FirstName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LastName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Password)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IsManager)
+                            </td>
+                            <td class="td-actions">
+                                <a asp-action="Edit" asp-route-id="@item.UserId">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.UserId">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.UserId">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        @if (Model.Count() == 0)
+        {
+            <div class="section-title">
+                <h2>No Users</h2>
+            </div>
+        }
+    </div>
+</section>
+
+@section Styles {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+}
+
+@section Scripts{
+
+    <script src="~/js/S/searchUser.js"></script>
+
+}

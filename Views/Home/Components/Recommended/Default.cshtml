@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Musebox_Web_Project.Models.Product>
+
+@if (Model != null && Model.Count() != 0)
+{
+    <section id="home-index-recommended" class="recommended">
+        <div class="container">
+
+            <div class="section-title">
+                <h2>Recommended For You</h2>
+            </div>
+
+            <div class="row">
+
+                @foreach (var item in Model)
+                {
+                    <div class="col-lg-4 col-md-4 d-flex align-items-stretch aos-init" data-aos="zoom-in">
+                        <div class="product">
+                            @if (item.Image != null)
+                            {
+                                string img = Convert.ToBase64String(item.Image);
+                                <img src="data:image/png;base64,@img" alt="">
+                            }
+                            else
+                            {
+                                <img src="~/img/Products/Guitars/Suhr - Classic S SSS, Sonic Blue.jpg" class="img-fluid" alt="">
+
+                            }
+                            <span>@Html.DisplayFor(modelItem => item.Brand.BrandName)</span>
+                            <h3>@Html.DisplayFor(modelItem => item.ProductName)</h3>
+                            <h6>@Html.DisplayFor(modelItem => item.ProductPrice) $</h6><br />
+
+                            <form asp-action="AddToCart" asp-controller="Users">
+                                <input type="hidden" asp-for="@item.ProductId" name="productId" />
+                                <input type="submit" value="Add To Cart" class="btn btn-info btn-sm" />
+                            </form>
+                        </div>
+                    </div>
+                }
+
+            </div>
+
+        </div>
+    </section>
+}
+    
+
+

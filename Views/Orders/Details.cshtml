@@ -1,0 +1,83 @@
+﻿@model Musebox_Web_Project.Models.Order
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+@{
+    IEnumerable<Product> productsInOrder = ViewData["productsInOrderData"] as IEnumerable<Product>;
+}
+
+<section id="orders" class="orders">
+    <div class="container">
+        <h2>Order Details</h2>
+
+        <table class="table">
+            <thead>
+                <tr class="table100-head">
+                    <th>
+                        @Html.DisplayNameFor(model => model.OrderDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.User)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(Model => Model.OrderDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(Model => Model.User.UserName)
+                    </td>
+                </tr>
+            </tbody>
+        </table><br />
+
+        <h2>Products In Order</h2>
+
+        <table class="table">
+            <thead>
+                <tr class="table100-head">
+                    <th>
+                        Product Name
+                    </th>
+                    <th>
+                        Product Price
+                    </th>
+                    <th>
+                        Product Type
+                    </th>
+                    <th>
+                        Brand
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Product item in productsInOrder)
+                {
+                <tr>
+                    <td>
+                        @item.ProductName
+                    </td>
+                    <td>
+                        @item.ProductPrice
+                    </td>
+                    <td>
+                        @item.ProductType
+                    </td>
+                    <td>
+                        @item.Brand.BrandName
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
+
+
+@section Styles {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+}

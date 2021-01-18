@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewData["Title"] = "Cart";
+    Layout = "_Layout";
+}
+
+<script src="~/js/cart.js"></script>
+
+<section id="home-about" class="home-about">
+    <div class="container">
+
+        <div class="section-title">
+            <span>Cart</span>
+            <h2>Cart</h2>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content aos-init" data-aos="fade-right">
+                <h2 class="section-header">CART</h2>
+                <div class="cart-row">
+                    <span class="cart-item cart-header cart-column">ITEM</span>
+                    <span class="cart-price cart-header cart-column">PRICE</span>
+                    <span class="cart-quantity cart-header cart-column">QUANTITY</span>
+                </div>
+                <div id="cart-items" class="cart-items">
+                </div>
+                <div class="cart-total">
+                    <strong class="cart-total-title">Total</strong>
+                    <span class="cart-total-price">$0</span>
+                </div>
+                <button class="btn btn-primary btn-purchase" type="button">PURCHASE</button>
+            </div>
+        </div>
+    </div>
+</section><!-- End About Section -->

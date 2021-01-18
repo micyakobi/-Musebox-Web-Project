@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Musebox_Web_Project.Models.Product>
+
+@{
+    ViewData["Title"] = "My Cart";
+}
+
+<section id="products" class="products">
+    <div class="container">
+        <h1>My Cart</h1>
+
+        <table class="table">
+            <thead>
+                <tr class="table100-head">
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductPrice)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductType)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Brand)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ProductName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ProductPrice)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ProductType)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Brand.BrandName)
+                            </td>
+                            <td class="td-actions">
+                                <form asp-action="DeleteFromCart">
+                                    <input type="hidden" asp-for="@item.ProductId" name="productId" />
+                                    <input type="submit" value="Delete" class="btn btn-danger" />
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        @if (Model.Count() != 0)
+        {
+            <form asp-action="Purchase" asp-controller="Users">
+                <input type="submit" value="Purchase" class="btn btn-primary" />
+            </form>
+        }
+        else
+        {
+            <div class="section-title">
+                <h2>No Products In Cart</h2>
+            </div>
+        }
+
+    </div>
+</section>
+
+@section Styles {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+}
+
+@*@section Scripts{ 
+    <script src="~/js/search.js"></script>
+}*@

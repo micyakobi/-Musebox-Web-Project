@@ -1,0 +1,88 @@
+﻿@model IEnumerable<Musebox_Web_Project.Models.Branch>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<section id="branches" class="branches">
+    <div class="container">
+        <h1>Index</h1>
+
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+
+        <div class="search-container">
+            <form asp-action="SearchBra" id="brnC">
+                <input id="branchN" autocomplete="off" name="name" placeholder="filter by name...">
+                <input id="branchA" autocomplete="off" name="address" placeholder="filter by address...">
+                <input id="branchLA" autocomplete="off" name="lat" placeholder="filter by latitude...">
+                <input id="branchLn" autocomplete="off" name="lng" placeholder="filter by longitude...">
+            </form>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr class="table100-head">
+                    <th>
+                        @Html.DisplayNameFor(model => model.BranchName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Address)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Latitude)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Longitude)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BranchName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Address)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Latitude)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Longitude)
+                            </td>
+                            <td class="td-actions">
+                                <a asp-action="Edit" asp-route-id="@item.BranchId">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.BranchId">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.BranchId">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+        @if (Model.Count() == 0)
+        {
+            <div class="section-title">
+                <h2>No Branches</h2>
+            </div>
+        }
+    </div>
+</section>
+
+@section Styles {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+}
+
+@section Scripts{
+
+    <script src="~/js/S/searchBranch.js"></script>
+
+}

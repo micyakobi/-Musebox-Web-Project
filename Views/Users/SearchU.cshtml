@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Musebox_Web_Project.Models.User>
+
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FirstName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LastName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Password)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IsManager)
+                            </td>
+                            <td class="td-actions">
+                                <a asp-action="Edit" asp-route-id="@item.UserId">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.UserId">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.UserId">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                

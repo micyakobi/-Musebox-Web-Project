@@ -1,0 +1,167 @@
+﻿@{ ViewData["Title"] = "Contact";
+    Layout = "_Layout"; }
+
+@model IEnumerable<Musebox_Web_Project.Models.Branch>
+
+<section id="home-contact" class="home-contact">
+    <div class="container">
+
+        <div class="section-title">
+            <span>Contact</span>
+            <h2>Contact</h2>
+        </div>
+
+        <div class="row aos-init" data-aos="fade-up">
+            <div class="col-lg-6">
+                <div class="info-box mb-4">
+                    <i class="bx bx-map"></i>
+                    <h3 class="contact-h">Our Branches</h3>
+                    <p>Dizengoff 50 TLV, Freiman 20 Rishon LeZion, Ussishkin 50 Ramat Hasharon</p>
+
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="info-box  mb-4">
+                    <i class="bx bx-envelope"></i>
+                    <h3 class="contact-h">Email Us</h3>
+                    <p>contact@musebox.com</p>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="info-box  mb-4">
+                    <i class="bx bx-phone-call"></i>
+                    <h3 class="contact-h">Call Us</h3>
+                    <p>+972 52 4592013</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row aos-init" data-aos="fade-up">
+
+            <div class="col-lg-6 col-md-12">
+                <div id="map"></div>
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+                <div class="info-box mb-4 multiple-column-div">
+                    <p class="multiple-column-p">
+                        <b>Our service is one of a kind!</b> Guaranteed. We serve our customers 24/7 and offer the best prices in the market to make shopping online fun again.
+                        No more questions and no more waiting. You can call, mail or even chat with us at any moment and get any info you need!
+                        You can even jump by a Musebox branch and get computerized assistant regarding any product you want to check! Try it out.
+                        We offer a 24/7 customer service but also promise to get back to you in less than an hour! Whatever is your need, We're here for you.
+                        Start your adventure with Musebox NOW and get a 10% discount coupon at the first time you contact us.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section id="home-contact-weather" class="home-contact-weather">
+    <div class="container">
+
+        <div class="section-title aos-init" data-aos="fade-right">
+            <H2>When it's best to come visit our store?</H2>
+        </div>
+
+        <div class="row aos-init" data-aos="fade-left">
+            <div class="col-lg-12">
+                <a class="weatherwidget-io"
+                   href="https://forecast7.com/en/32d0934d78/tel-aviv-yafo/"
+                   data-label_1="TEL AVIV"
+                   data-label_2="WEATHER"
+                   data-font="Open Sans"
+                   data-icons="Climacons Animated"
+                   data-mode="Forecast" data-days="5" data-textcolor="#00000">TEL AVIV WEATHER</a>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section id="home-contact-weather" class="home-contact-weather">
+    <div class="container">
+
+        <div class="row aos-init" data-aos="fade-right">
+            <div class="col-lg-12">
+                <canvas id="canvas" width="1110" height="200"></canvas>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<!-- Google map API scripts -->
+
+<script type="text/javascript">
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: {
+                    lat: 32.07514,
+                    lng: 34.77571
+                },
+                zoom: 9,
+            });
+
+
+            $.getJSON("@Url.Action("GetAllLocation", "Branches")", function (data, status) {
+
+                var marker = [];
+                var info = [];
+                var infoW = [];
+
+                for (var i = 0; i < data.length; i++) {
+
+                    var myLatlng = new google.maps.LatLng(data[i].latitude, data[i].longitude);
+
+                    marker[i] = new google.maps.Marker({
+                        position: myLatlng,
+                        map: map
+                    });
+
+                    info[i] = '<div>' + '<h6>Here We Are</h6>' + data[i].address + "</div>";
+
+
+                    infoW[i] = new google.maps.InfoWindow({
+                        content: info[i]
+                    });
+
+
+                    var mdl = marker[i];
+                    google.maps.event.addListener(marker[i], 'mouseover', (function (mdl, i) {
+                        return function () {
+                            infoW[i].open(map, marker[i]);
+                        }
+                    })(marker[i], i));
+                    google.maps.event.addListener(marker[i], 'mouseout', (function (mdl, i) {
+                        return function () {
+                            infoW[i].close();
+                        }
+                    })(marker[i], i));
+
+                }
+
+            })
+
+        }
+</script>
+
+
+@section Scripts{
+    <script src="~/js/weather.js"></script>
+    <script src="~/js/canvas.js"></script>
+}
+
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAgO2AFvhgiJT5jryVoCjF5fOWPBEQ32HI&callback=initMap">
+</script>
