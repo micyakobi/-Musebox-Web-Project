@@ -14,7 +14,6 @@ Installation
 * Export git repositorie to visual studio
 * In visual studio build the project and open NuGet package manager console
 * Run the following command Update-Database ( if you get an error in this step please delete the entire migration folder and run Enable-Migrations following by Add-Migration init and Update-Database again)
-* Update the database tabels with the queries listed in DataBaseQueries file
 * Build and run the application
 
 
