@@ -5,7 +5,7 @@ and advance our programing skills with languages like javascript, html/css and C
 
 Languages
 * JavaScript -> jQuery
-* Html / css
+* HTML / CSS
 * C#
 
 # How To Use
